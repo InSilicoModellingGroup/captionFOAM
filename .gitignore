@@ -1,0 +1,9 @@
+linux64GccDPInt32Opt/
+.vscode
+dynamicCode/
+lnInclude/
+polyMesh/
+__pycache__/
+*.msh
+BCs/
+test/
