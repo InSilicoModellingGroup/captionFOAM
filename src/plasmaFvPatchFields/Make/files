@@ -1,0 +1,8 @@
+speciesWallFlux/speciesWallFluxFvPatchScalarField.C
+electronWallFlux/electronWallFluxFvPatchScalarField.C
+energyWallFlux/energyWallFluxFvPatchScalarField.C
+
+speciesWallFluxCorrected/speciesWallFluxCorrectedFvPatchScalarField.C
+electronWallFluxCorrected/electronWallFluxCorrectedFvPatchScalarField.C
+
+LIB = $(FOAM_USER_LIBBIN)/libplasmaFvPatchFields

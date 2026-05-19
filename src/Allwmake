@@ -1,0 +1,24 @@
+#!/bin/bash
+cd "${0%/*}" || exit                                # Run from this directory
+#------------------------------------------------------------------------------
+
+echo ========================================
+echo Compile OpenFOAM libraries
+echo ========================================
+
+#------------------------------------------------------------------------------
+
+wmake libso parabolicInlet
+wmake libso potentialTools
+wmake libso transportTools
+wmake libso plasmaChemistry
+wmake libso electronEnergy
+wmake libso plasmaFvPatchFields
+
+#------------------------------------------------------------------------------
+
+echo ========================================
+echo Done compiling OpenFOAM libraries
+echo ========================================
+
+#------------------------------------------------------------------------------

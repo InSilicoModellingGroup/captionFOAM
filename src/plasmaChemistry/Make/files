@@ -1,0 +1,12 @@
+dummyThermo/dummyThermo.C
+plasmaChemistryModel/plasmaChemistryModel.C
+
+reactionRateCoeffs/reactionRateCoeffsBase.C
+reactionRateCoeffs/constantRateCoeff.C
+reactionRateCoeffs/ArrheniusRateCoeff.C
+reactionRateCoeffs/bolsigRateCoeff.C
+reactionRateCoeffs/bolsig3BodyRateCoeff.C
+reactionRateCoeffs/TownsendRateCoeff.C
+
+
+LIB = $(FOAM_USER_LIBBIN)/libplasmaChemistry
