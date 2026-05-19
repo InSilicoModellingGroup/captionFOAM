@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "blockMeshDict": "cpp",
+        "decomposeParDict": "cpp",
+        "plasmaChemistryFoam.C": "cpp"
+    }
+}
