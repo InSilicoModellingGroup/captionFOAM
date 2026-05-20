@@ -1,0 +1,6 @@
+voltageHandlerBase.C
+voltageAC/voltageAC.C
+voltagePulsed/voltagePulsed.C
+voltageDC/voltageDC.C
+
+LIB = $(FOAM_USER_LIBBIN)/libappliedVoltage

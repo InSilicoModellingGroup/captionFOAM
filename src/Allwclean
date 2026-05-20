@@ -1,0 +1,24 @@
+#!/bin/bash
+cd "${0%/*}" || exit                                # Run from this directory
+#------------------------------------------------------------------------------
+
+echo ========================================
+echo Clean captionFOAM libraries
+echo ========================================
+
+#------------------------------------------------------------------------------
+
+wclean libso parabolicInlet
+wclean libso potentialTools
+wclean libso transportTools
+wclean libso plasmaChemistry
+wclean libso electronEnergy
+wclean libso plasmaFvPatchFields
+
+#------------------------------------------------------------------------------
+
+echo ========================================
+echo Done cleaning captionFOAM libraries
+echo ========================================
+
+#------------------------------------------------------------------------------

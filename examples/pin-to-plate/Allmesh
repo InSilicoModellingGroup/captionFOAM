@@ -1,0 +1,50 @@
+#!/bin/bash
+cd "${0%/*}" || exit                                # Run from this directory
+. $WM_PROJECT_DIR/bin/tools/RunFunctions            # Tutorial run functions
+#------------------------------------------------------------------------------
+
+# Delete 0 folder
+rm -r 0
+
+# # Run blockMesh
+blockMesh
+mkdir -p constant/triSurface
+gmsh system/electrode.geo -2 -format stl -o constant/triSurface/electrode.stl
+surfaceFeatureExtract
+
+# Run snappyHexMesh
+nProcs=$(getNumberOfProcessors)
+decomposePar -force
+mpirun -oversubscribe -np $nProcs snappyHexMesh -overwrite -parallel
+reconstructParMesh -constant -mergeTol 1e-12
+rm -rf processor*
+# snappyHexMesh -overwrite
+extrudeMesh
+createPatch -overwrite
+
+# Run topoSet and Split regions
+# topoSet
+# splitMeshRegions -cellZones -overwrite
+# rm -fr ./system/region0/
+# rm -fr constant/polyMesh
+# rm -fr ./system/dielectric/
+# rm -fr ./constant/dielectric/
+
+# Replace 0 directory contents with 0.org
+rm -fvr 0
+cp -r 0.org 0
+
+# Make wedge type
+# find ./system/* -type d 2>/dev/null -exec cp -v ./system/changeDictionaryDict {} \;
+# changeDictionary
+# changeDictionary -region dielectric
+
+# Prepare for remote paraview
+caseName=$(basename "$PWD")
+touch "$caseName.foam"
+
+# Output message
+echo
+echo Case created.
+
+#------------------------------------------------------------------------------

@@ -1,0 +1,45 @@
+#----------------------------------*-sh-*--------------------------------------
+# =========                 |
+# \\      /  F ield         | captionFOAM: OpenFOAM extension
+#  \\    /   O peration     |
+#   \\  /    A nd           |
+#    \\/     M anipulation  |
+#------------------------------------------------------------------------------
+# File
+#     etc/bashrc
+#
+# Description
+#     The captionFOAM environment for POSIX shell (eg, bash,dash,zsh,...).
+#     Source manually or from the ~/.bashrc file.
+#
+#     Requires an active OpenFOAM environment (source OpenFOAM's etc/bashrc
+#     before this one).
+#
+#------------------------------------------------------------------------------
+
+# Resolve the absolute path to the project root (location of this file's parent)
+_thisFile="${BASH_SOURCE[0]:-$0}"
+
+# [CAPTIONFOAM_DIR] - Location of the captionFOAM project root
+export CAPTIONFOAM_DIR="$( cd "$( dirname "$_thisFile" )/.." && pwd )"
+
+# [CAPTIONFOAM_SRC] - Location of captionFOAM user libraries
+export CAPTIONFOAM_SRC="$CAPTIONFOAM_DIR/src"
+
+unset _thisFile
+
+# Sanity check
+if [ ! -d "$CAPTIONFOAM_SRC" ]
+then
+    echo "Error: captionFOAM source directory not found" 1>&2
+    echo "No directory: $CAPTIONFOAM_SRC" 1>&2
+fi
+
+if [ -n "$FOAM_VERBOSE" ] && [ -n "$PS1" ]
+then
+    echo "captionFOAM environment set:" 1>&2
+    echo "  CAPTIONFOAM_DIR = $CAPTIONFOAM_DIR" 1>&2
+    echo "  CAPTIONFOAM_SRC = $CAPTIONFOAM_SRC" 1>&2
+fi
+
+#------------------------------------------------------------------------------

@@ -1,0 +1,85 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     plasmaChemistryFoamSurf;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         50.0e-9;
+
+deltaT          1e-14;
+
+writeControl    adjustableRunTime;
+
+writeInterval   1.0e-10;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  12;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   8;
+
+runTimeModifiable true;
+
+adjustTimeStep  true;
+
+maxCo           0.01;
+
+maxRegionLoops  10;
+
+maxRegionLoopsExtAmpEqn  3000;
+
+customUpdatePlasmaCoeffs true;
+
+plasmaCoeffsUpdateInterval 1;
+
+printScreenResults 100;
+
+// functions
+// {
+//     fieldAverage1
+//     {
+//         type            fieldAverage;
+//         libs            ("libfieldFunctionObjects.so");
+//         writeControl    writeTime;
+//         log             false;
+
+//         fields
+//         (
+//             e
+//             {
+//                 mean        on;
+//                 prime2Mean  off;
+//                 base        time;
+//             }
+//         );
+        
+//     }
+// }
+
+
+// ************************************************************************* //
+

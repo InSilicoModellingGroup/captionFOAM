@@ -1,0 +1,158 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      speciesProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+e
+{
+    chargeNumber    -1;
+    molarMass       5.4857990962e-4;
+    mobility
+    {
+        type        bolsig;
+    }
+    diffusion
+    {
+        type        bolsig;
+    }
+}
+
+N2
+{
+    chargeNumber    0;
+    molarMass       24.0;
+    mobility
+    {
+        type        none;
+    }
+    diffusion
+    {
+        type        none;
+    }
+}
+
+N2_plus
+{
+    chargeNumber    1;
+    molarMass       24.0;
+    mobility
+    {
+        type        none;
+    }
+    diffusion
+    {
+        type        none;
+    }
+}
+
+N4_plus
+{
+    chargeNumber    1;
+    molarMass       48.0;
+    mobility
+    {
+        type        none;
+    }
+    diffusion
+    {
+        type        none;
+    }
+}
+
+O2
+{
+    chargeNumber    0;
+    molarMass       32.0;
+    mobility
+    {
+        type        none;
+    }
+    diffusion
+    {
+        type        none;
+    }
+}
+
+O
+{
+    chargeNumber    0;
+    molarMass       16.0;
+    mobility
+    {
+        type        none;
+    }
+    diffusion
+    {
+        type        none;
+    }
+}
+
+O2_plus
+{
+    chargeNumber    1;
+    molarMass       32.0;
+    mobility
+    {
+        type        none;
+    }
+    diffusion
+    {
+        type        none;
+    }
+}
+
+O4_plus
+{
+    chargeNumber    1;
+    molarMass       64.0;
+    mobility
+    {
+        type        none;
+    }
+    diffusion
+    {
+        type        none;
+    }
+}
+
+O2_plusN2
+{
+    chargeNumber    1;
+    molarMass       56.0;
+    mobility
+    {
+        type        none;
+    }
+    diffusion
+    {
+        type        none;
+    }
+}
+
+O2_minus
+{
+    chargeNumber    -1;
+    molarMass       32.0;
+    mobility
+    {
+        type        none;
+    }
+    diffusion
+    {
+        type        none;
+    }
+}
+
+
+// ************************************************************************* //
