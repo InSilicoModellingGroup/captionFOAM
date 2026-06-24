@@ -1,0 +1,258 @@
+BOLSIG+ script file: bolsigInput.dat
+READCOLLISIONS
+He
+crossSections.txt
+C1    He    Elastic                                             
+C2    He    Excitation    19.82 eV                              
+C3    He    Ionization    24.59 eV                              
+N2
+crossSections.txt
+C4    N2    Effective (momentum)                                
+O2
+crossSections.txt
+C5    O2    Effective (momentum)                                
+RUN2D
+R1    0.0100 Td    0.0523 eV                                    
+R2    8.48 Td    8.04 eV                                        
+R3    17.0 Td    17.9 eV   Extrapolated                         
+R4    25.4 Td    30.3 eV   Extrapolated                         
+R5    33.9 Td    46.6 eV   Extrapolated                         
+R6    42.4 Td    66.6 eV   Extrapolated                         
+R7    50.9 Td    90.8 eV   Extrapolated                         
+R8    59.3 Td    120. eV   Extrapolated                         
+R9    67.8 Td    157. eV   Extrapolated                         
+R10   76.3 Td    202. eV   Extrapolated                         
+R11   84.8 Td    Failed                                         
+R12   93.2 Td    Failed                                         
+R13   102. Td    Failed                                         
+R14   110. Td    Failed                                         
+R15   119. Td    Failed                                         
+R16   127. Td    Failed                                         
+R17   136. Td    Failed                                         
+R18   144. Td    Failed                                         
+R19   153. Td    Failed                                         
+R20   161. Td    Failed                                         
+R21   169. Td    Failed                                         
+R22   178. Td    Failed                                         
+R23   186. Td    Failed                                         
+R24   195. Td    Failed                                         
+R25   203. Td    Failed                                         
+R26   212. Td    Failed                                         
+R27   220. Td    Failed                                         
+R28   229. Td    Failed                                         
+R29   237. Td    Failed                                         
+R30   246. Td    Failed                                         
+R31   254. Td    Failed                                         
+R32   263. Td    Failed                                         
+R33   271. Td    Failed                                         
+R34   280. Td    Failed                                         
+R35   288. Td    Failed                                         
+R36   297. Td    Failed                                         
+R37   305. Td    Failed                                         
+R38   314. Td    Failed                                         
+R39   322. Td    Failed                                         
+R40   331. Td    Failed                                         
+R41   339. Td    Failed                                         
+R42   347. Td    Failed                                         
+R43   356. Td    Failed                                         
+R44   364. Td    Failed                                         
+R45   373. Td    Failed                                         
+R46   381. Td    Failed                                         
+R47   390. Td    Failed                                         
+R48   398. Td    Failed                                         
+R49   407. Td    Failed                                         
+R50   415. Td    Failed                                         
+R51   424. Td    Failed                                         
+R52   432. Td    Failed                                         
+R53   441. Td    Failed                                         
+R54   449. Td    Failed                                         
+R55   458. Td    Failed                                         
+R56   466. Td    Failed                                         
+R57   475. Td    Failed                                         
+R58   483. Td    Failed                                         
+R59   492. Td    Failed                                         
+R60   500. Td    Failed                                         
+R61   0.0100 Td    0.0431 eV                                    
+R62   8.48 Td    6.04 eV                                        
+R63   17.0 Td    8.03 eV                                        
+R64   25.4 Td    8.88 eV                                        
+R65   33.9 Td    9.59 eV                                        
+R66   42.4 Td    10.3 eV                                        
+R67   50.9 Td    10.9 eV                                        
+R68   59.3 Td    11.5 eV                                        
+R69   67.8 Td    12.1 eV                                        
+R70   76.3 Td    12.7 eV   Extrapolated                         
+R71   84.8 Td    13.3 eV   Extrapolated                         
+R72   93.2 Td    13.9 eV   Extrapolated                         
+R73   102. Td    14.5 eV   Extrapolated                         
+R74   110. Td    15.1 eV   Extrapolated                         
+R75   119. Td    15.7 eV   Extrapolated                         
+R76   127. Td    16.3 eV   Extrapolated                         
+R77   136. Td    16.8 eV   Extrapolated                         
+R78   144. Td    17.4 eV   Extrapolated                         
+R79   153. Td    18.0 eV   Extrapolated                         
+R80   161. Td    18.6 eV   Extrapolated                         
+R81   169. Td    19.2 eV   Extrapolated                         
+R82   178. Td    19.8 eV   Extrapolated                         
+R83   186. Td    20.4 eV   Extrapolated                         
+R84   195. Td    21.0 eV   Extrapolated                         
+R85   203. Td    21.6 eV   Extrapolated                         
+R86   212. Td    22.2 eV   Extrapolated                         
+R87   220. Td    22.8 eV   Extrapolated                         
+R88   229. Td    23.4 eV   Extrapolated                         
+R89   237. Td    24.1 eV   Extrapolated                         
+R90   246. Td    24.7 eV   Extrapolated                         
+R91   254. Td    25.3 eV   Extrapolated                         
+R92   263. Td    26.0 eV   Extrapolated                         
+R93   271. Td    26.6 eV   Extrapolated                         
+R94   280. Td    27.2 eV   Extrapolated                         
+R95   288. Td    27.9 eV   Extrapolated                         
+R96   297. Td    28.5 eV   Extrapolated                         
+R97   305. Td    29.2 eV   Extrapolated                         
+R98   314. Td    29.9 eV   Extrapolated                         
+R99   322. Td    30.5 eV   Extrapolated                         
+R100  331. Td    31.2 eV   Extrapolated                         
+R101  339. Td    31.9 eV   Extrapolated                         
+R102  347. Td    32.6 eV   Extrapolated                         
+R103  356. Td    33.2 eV   Extrapolated                         
+R104  364. Td    33.9 eV   Extrapolated                         
+R105  373. Td    34.6 eV   Extrapolated                         
+R106  381. Td    35.3 eV   Extrapolated                         
+R107  390. Td    36.0 eV   Extrapolated                         
+R108  398. Td    36.8 eV   Extrapolated                         
+R109  407. Td    37.5 eV   Extrapolated                         
+R110  415. Td    38.2 eV   Extrapolated                         
+R111  424. Td    38.9 eV   Extrapolated                         
+R112  432. Td    39.7 eV   Extrapolated                         
+R113  441. Td    40.4 eV   Extrapolated                         
+R114  449. Td    41.2 eV   Extrapolated                         
+R115  458. Td    41.9 eV   Extrapolated                         
+R116  466. Td    42.7 eV   Extrapolated                         
+R117  475. Td    43.5 eV   Extrapolated                         
+R118  483. Td    44.2 eV   Extrapolated                         
+R119  492. Td    45.0 eV   Extrapolated                         
+R120  500. Td    45.8 eV   Extrapolated                         
+R121  0.0100 Td    0.0410 eV                                    
+R122  8.48 Td    5.55 eV                                        
+R123  17.0 Td    7.55 eV                                        
+R124  25.4 Td    8.32 eV                                        
+R125  33.9 Td    8.94 eV                                        
+R126  42.4 Td    9.52 eV                                        
+R127  50.9 Td    10.1 eV                                        
+R128  59.3 Td    10.6 eV                                        
+R129  67.8 Td    11.1 eV                                        
+R130  76.3 Td    11.7 eV                                        
+R131  84.8 Td    12.2 eV   Extrapolated                         
+R132  93.2 Td    12.7 eV   Extrapolated                         
+R133  102. Td    13.3 eV   Extrapolated                         
+R134  110. Td    13.8 eV   Extrapolated                         
+R135  119. Td    14.3 eV   Extrapolated                         
+R136  127. Td    14.8 eV   Extrapolated                         
+R137  136. Td    15.4 eV   Extrapolated                         
+R138  144. Td    15.9 eV   Extrapolated                         
+R139  153. Td    16.4 eV   Extrapolated                         
+R140  161. Td    17.0 eV   Extrapolated                         
+R141  169. Td    17.5 eV   Extrapolated                         
+R142  178. Td    18.0 eV   Extrapolated                         
+R143  186. Td    18.6 eV   Extrapolated                         
+R144  195. Td    19.1 eV   Extrapolated                         
+R145  203. Td    19.7 eV   Extrapolated                         
+R146  212. Td    20.2 eV   Extrapolated                         
+R147  220. Td    20.8 eV   Extrapolated                         
+R148  229. Td    21.4 eV   Extrapolated                         
+R149  237. Td    21.9 eV   Extrapolated                         
+R150  246. Td    22.5 eV   Extrapolated                         
+R151  254. Td    23.1 eV   Extrapolated                         
+R152  263. Td    23.6 eV   Extrapolated                         
+R153  271. Td    24.2 eV   Extrapolated                         
+R154  280. Td    24.8 eV   Extrapolated                         
+R155  288. Td    25.4 eV   Extrapolated                         
+R156  297. Td    26.0 eV   Extrapolated                         
+R157  305. Td    26.6 eV   Extrapolated                         
+R158  314. Td    27.2 eV   Extrapolated                         
+R159  322. Td    27.8 eV   Extrapolated                         
+R160  331. Td    28.4 eV   Extrapolated                         
+R161  339. Td    29.0 eV   Extrapolated                         
+R162  347. Td    29.6 eV   Extrapolated                         
+R163  356. Td    30.3 eV   Extrapolated                         
+R164  364. Td    30.9 eV   Extrapolated                         
+R165  373. Td    31.5 eV   Extrapolated                         
+R166  381. Td    32.2 eV   Extrapolated                         
+R167  390. Td    32.8 eV   Extrapolated                         
+R168  398. Td    33.4 eV   Extrapolated                         
+R169  407. Td    34.1 eV   Extrapolated                         
+R170  415. Td    34.8 eV   Extrapolated                         
+R171  424. Td    35.4 eV   Extrapolated                         
+R172  432. Td    36.1 eV   Extrapolated                         
+R173  441. Td    36.7 eV   Extrapolated                         
+R174  449. Td    37.4 eV   Extrapolated                         
+R175  458. Td    38.1 eV   Extrapolated                         
+R176  466. Td    38.8 eV   Extrapolated                         
+R177  475. Td    39.5 eV   Extrapolated                         
+R178  483. Td    40.2 eV   Extrapolated                         
+R179  492. Td    40.8 eV   Extrapolated                         
+R180  500. Td    41.6 eV   Extrapolated                         
+R181  0.0100 Td    0.0402 eV                                    
+R182  8.48 Td    5.38 eV                                        
+R183  17.0 Td    7.19 eV                                        
+R184  25.4 Td    7.95 eV                                        
+R185  33.9 Td    8.60 eV                                        
+R186  42.4 Td    9.22 eV                                        
+R187  50.9 Td    9.83 eV                                        
+R188  59.3 Td    10.5 eV   Extrapolated                         
+R189  67.8 Td    11.1 eV   Extrapolated                         
+R190  76.3 Td    11.7 eV   Extrapolated                         
+R191  84.8 Td    12.4 eV   Extrapolated                         
+R192  93.2 Td    13.1 eV   Extrapolated                         
+R193  102. Td    13.8 eV   Extrapolated                         
+R194  110. Td    14.5 eV   Extrapolated                         
+R195  119. Td    15.2 eV   Extrapolated                         
+R196  127. Td    15.9 eV   Extrapolated                         
+R197  136. Td    16.7 eV   Extrapolated                         
+R198  144. Td    17.5 eV   Extrapolated                         
+R199  153. Td    18.3 eV   Extrapolated                         
+R200  161. Td    19.1 eV   Extrapolated                         
+R201  169. Td    19.9 eV   Extrapolated                         
+R202  178. Td    20.8 eV   Extrapolated                         
+R203  186. Td    21.7 eV   Extrapolated                         
+R204  195. Td    22.5 eV   Extrapolated                         
+R205  203. Td    23.4 eV   Extrapolated                         
+R206  212. Td    24.3 eV   Extrapolated                         
+R207  220. Td    25.3 eV   Extrapolated                         
+R208  229. Td    26.2 eV   Extrapolated                         
+R209  237. Td    27.1 eV   Extrapolated                         
+R210  246. Td    28.1 eV   Extrapolated                         
+R211  254. Td    29.1 eV   Extrapolated                         
+R212  263. Td    30.1 eV   Extrapolated                         
+R213  271. Td    31.0 eV   Extrapolated                         
+R214  280. Td    32.0 eV   Extrapolated                         
+R215  288. Td    33.0 eV   Extrapolated                         
+R216  297. Td    34.1 eV   Extrapolated                         
+R217  305. Td    35.1 eV   Extrapolated                         
+R218  314. Td    36.1 eV   Extrapolated                         
+R219  322. Td    37.2 eV   Extrapolated                         
+R220  331. Td    38.2 eV   Extrapolated                         
+R221  339. Td    39.3 eV   Extrapolated                         
+R222  347. Td    40.3 eV   Extrapolated                         
+R223  356. Td    41.4 eV   Extrapolated                         
+R224  364. Td    42.5 eV   Extrapolated                         
+R225  373. Td    43.6 eV   Extrapolated                         
+R226  381. Td    44.7 eV   Extrapolated                         
+R227  390. Td    45.8 eV   Extrapolated                         
+R228  398. Td    46.9 eV   Extrapolated                         
+R229  407. Td    48.0 eV   Extrapolated                         
+R230  415. Td    49.1 eV   Extrapolated                         
+R231  424. Td    50.3 eV   Extrapolated                         
+R232  432. Td    51.4 eV   Extrapolated                         
+R233  441. Td    52.6 eV   Extrapolated                         
+R234  449. Td    53.7 eV   Extrapolated                         
+R235  458. Td    54.9 eV   Extrapolated                         
+R236  466. Td    56.0 eV   Extrapolated                         
+R237  475. Td    57.2 eV   Extrapolated                         
+R238  483. Td    58.4 eV   Extrapolated                         
+R239  492. Td    59.6 eV   Extrapolated                         
+R240  500. Td    60.8 eV   Extrapolated                         
+bolsigOutRun2D.dat
+SAVERESULTS
+bolsigOutput.dat
+FINISHED

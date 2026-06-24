@@ -1,0 +1,41 @@
+#!/bin/bash
+cd "${0%/*}" || exit                                # Run from this directory
+. $WM_PROJECT_DIR/bin/tools/RunFunctions            # Tutorial run functions
+#------------------------------------------------------------------------------
+
+# Delete 0 folder
+rm -r 0
+
+# Run blockMesh
+gmsh system/reactor.geo -3 -o system/reactor.msh -format msh2
+gmshToFoam system/reactor.msh
+
+# # Convert mesh to wedge
+# extrudeMesh
+# createPatch -overwrite
+
+# Run topoSet and Split regions
+# topoSet
+# splitMeshRegions -cellZones -overwrite
+# rm -fr system/region0/
+# rm -fr ./system/dielectric/
+# rm -fr ./constant/dielectric/
+
+# # Replace 0 directory contents with 0.org
+# rm -fvr 0
+# cp -r 0.org 0
+
+# # Make wedge type
+# find ./system/* -type d 2>/dev/null -exec cp -v ./system/changeDictionaryDict {} \;
+# changeDictionary
+# changeDictionary -region dielectric
+
+# # Prepare for remote paraview
+# caseName=$(basename "$PWD")
+# touch "$caseName.foam"
+
+# Output message
+echo
+echo Case created.
+
+#------------------------------------------------------------------------------

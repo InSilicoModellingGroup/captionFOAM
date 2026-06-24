@@ -1,0 +1,105 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+/*
+    "rho.*"
+    {
+        solver          diagonal;
+    }
+
+    p
+    {
+        solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-6;
+        relTol           0.1;
+    }
+
+    pFinal
+    {
+        $p;
+        tolerance        1e-6;
+        relTol           0.0;
+    }
+
+    "(U|h|k|epsilon)"
+    {
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        tolerance       1e-8;
+        // relTol          0.1;
+    }
+
+    "(U|h|k|epsilon)Final"
+    {
+        $U;
+        relTol          0;
+    }
+
+    Ni
+    {
+        $hFinal;
+    }*/
+    
+    Ni
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-08;
+        //relTol          0.05;
+        // maxIter         0;      // This line suppresses the charge transport equation
+    }
+
+    voltExtAmp
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-06;
+        // relTol          0.05;
+        // maxIter         1;
+    }
+
+    voltInd
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-06;
+        // relTol          0.05;
+        // maxIter         100;
+    }
+
+    nE
+    // {
+    //     solver          PBiCGStab;
+    //     preconditioner  DILU;
+    //     tolerance       1e-06;
+    //     //relTol          0.05;
+    //     // maxIter         0;
+    // }
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-08;
+        //relTol          0.05;
+        // maxIter         0;      // This line suppresses the charge transport equation
+    }
+
+}
+
+
+// ************************************************************************* //

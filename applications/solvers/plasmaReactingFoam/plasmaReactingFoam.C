@@ -85,18 +85,8 @@ int main(int argc, char *argv[])
         // Equations for species continuity
         #include "NEqn.H"
 
-        Info << "TEEEEEEEEEEEEEEEEEEEEEEEEST" << endl;
-
         // Equation for mean electron energy density
         #include "nEEqn.H"
-
-        // // Calculate charge density
-        // rhoq = 0.0*rhoq;
-        // forAll(composition.species(), i)
-        // {
-        //     const scalar& chargeNumberValue = chargeNumber.get<scalar>(composition.species()[i]);
-        //     rhoq += chargeNumberValue*constant::electromagnetic::e*N[i];
-        // }
 
         if (runTime.timeIndex() % printScreenResults == 0 || runTime.timeIndex() == 1)
         {

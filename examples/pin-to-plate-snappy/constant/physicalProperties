@@ -1,0 +1,59 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      physicalProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+gammaSE     0.01;
+
+// Atmosphere conditions
+atmosphericConditions
+{
+    pGasValue           101325;
+    TGasValue           300;
+    rhoGasValue         1.225;
+    TEleInitValue       2;
+}
+
+// Transport and reaction coefficients approximation
+plasmaCoeffApprox
+{
+    localCoeffApprox
+    {
+        type                LMEA;            // LFA or LMEA (should be consistent with bolsig+ input file)
+        solveEleEnergyEqn   yes;             // yes (default) or no (if LMEA then overrides to yes)
+    }
+    backgndAtmosphere
+    {
+        type                singleGas;  // background atmosphere type: singleGas (default) or twoGasMixture
+    }
+}
+
+
+// Voltage characteristics
+type     DC;
+
+peakVoltage     10.0e3;
+
+/*  
+
+frequency       1e3;
+
+riseTime        1.0e-4;
+
+plateauWidth    2.0e-4;
+
+startPoint      0.5e-4;
+*/
+
+// ************************************************************************* //

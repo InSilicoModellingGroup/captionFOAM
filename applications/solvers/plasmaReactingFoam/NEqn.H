@@ -61,9 +61,9 @@
             // Update species integrated face particle flux with latest Ni values.
             ji = zi*constant::electromagnetic::e*(-zi*linearInterpolate(mui*Ni)*fvc::snGrad(volt) - linearInterpolate(Di)*fvc::snGrad(Ni));
             Gammai = -zi*mui*Ni*fvc::grad(volt) - Di*fvc::grad(Ni);
+            rhoq += zi*constant::electromagnetic::e*N[i];
             jt += ji;
             Gammat += Gammai;
-            rhoq += zi*constant::electromagnetic::e*N[i];
 
             if (zi > 0)
             {
@@ -72,10 +72,6 @@
         }
 
         N[composition.species().find("e")].clamp_max(1.0e25);
-        // if (composition.species().find("He_plus") >= 0)
-        // {
-        //     N[composition.species().find("He_plus")].clamp_max(1.0e25);
-        // }
     }
 
     N[inertIndex] = NInert - Nt;
@@ -94,7 +90,7 @@
     }
 
     // Calculate electric current
-    Icond = constant::electromagnetic::e*fvc::domainIntegrate(Gammat & EExt)/1.0e-3;
+    Icond = constant::electromagnetic::e*fvc::domainIntegrate(Gammat & EExt)/1.0e3;
 }
 
 

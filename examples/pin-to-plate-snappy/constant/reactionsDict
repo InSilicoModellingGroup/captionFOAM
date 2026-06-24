@@ -1,0 +1,41 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2406                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      reactionsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+species
+(
+    e
+    N2
+    O2
+    N2_plus
+    O2_plus
+);
+
+inertSpecie N2;
+
+reactions
+{
+    R1
+    {
+        reaction    "e + N2 = 2 e + N2_plus";
+        type        bolsig;
+    }
+
+    R2
+    {
+        reaction    "e + O2 = 2 e + O2_plus";
+        type        bolsig;
+    }
+}

@@ -9,7 +9,7 @@ echo ========================================
 #------------------------------------------------------------------------------
 
 wclean libso parabolicInlet
-wclean libso potentialTools
+wclean libso appliedVoltage
 wclean libso transportTools
 wclean libso plasmaChemistry
 wclean libso electronEnergy

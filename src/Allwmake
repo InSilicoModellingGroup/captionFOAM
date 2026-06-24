@@ -9,7 +9,7 @@ echo ========================================
 #------------------------------------------------------------------------------
 
 wmake libso parabolicInlet
-wmake libso potentialTools
+wmake libso appliedVoltage
 wmake libso transportTools
 wmake libso plasmaChemistry
 wmake libso electronEnergy

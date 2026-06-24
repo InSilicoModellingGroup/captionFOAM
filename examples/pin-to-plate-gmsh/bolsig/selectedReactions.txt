@@ -1,0 +1,12 @@
+The selected reactions for BOLSIG+ are:
+
+ID     Reaction                                    Energy       Database        File      
+==     ========                                    ======       ========        ====      
+45     E + He -> E + He, Elastic                   --           Morgan          ./LXCatData/He/R45.txt
+46     E + He -> E + He*(19.82eV), Excitation      19.82        Morgan          ./LXCatData/He/R46.txt
+48     E + He -> E + E + He+, Ionization           24.59        Morgan          ./LXCatData/He/R48.txt
+
+1      E + N2 -> E + N2, Effective                 --           IST-Lisbon      ./LXCatData/N2/R1.txt
+
+2      E + O2 -> E + O2, Effective                 --           IST-Lisbon      ./LXCatData/O2/R2.txt
+
