@@ -52,7 +52,7 @@ This work was partially funded by the European Union's Horizon 2020 research and
 captionFOAM is developed by the [In Silico Modelling Group](https://in-silico-modelling.ucy.ac.cy/) at the University of Cyprus.
 
 - Core developer: — [George Vafakos](https://github.com/GeorgeVafakos)
-- Supervision: — [Vasileios Vavourakis](https://github.com/vasvav), [Pambos Anastasiades](https://github.com/pambosana)
+- Supervision: — [Vasileios Vavourakis](https://github.com/vasvav), [Pambos Anastassiou](https://github.com/pambosana)
 
 <!-- ## Citation -->
 
