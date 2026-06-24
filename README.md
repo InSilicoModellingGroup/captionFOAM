@@ -2,7 +2,7 @@
 Cold Atmospheric Plasma Tool for IONised gases based on OpenFOAM
 
 ## Description
-**captionFOAM** is an extension of OpenFOAM for the finite-volume modelling of cold atmospheric plasmas (CAPs). It augments OpenFOAM with custom libraries and solvers for low-temperature plasma discharges, solving the coupled drift-diffusion transport equations for charged species, Poisson's equation for the electric field. Transport coefficients and reaction rates are obtained as functions of either the reduced electric field E/N (LFA - Local Field Approximation) or the mean electron energy $\varepsilon_m$ (LMEA - Local Mean Energy Approximation).
+**captionFOAM** is an extension of OpenFOAM for the finite-volume modelling of cold atmospheric plasmas (CAPs). It extends OpenFOAM with custom libraries and solvers for low-temperature plasma discharges, solving the coupled drift-diffusion transport equations for charged species, Poisson's equation for the electric field. Transport coefficients and reaction rates are obtained as functions of either the reduced electric field E/N (LFA - Local Field Approximation) or the mean electron energy $\varepsilon_m$ (LMEA - Local Mean Energy Approximation).
 
 A dedicated Python-based preprocessing toolkit provides built-in coupling with the BOLSIG+ freeware. The toolkit downloads BOLSIG+, utilises reaction cross-section data from the LXCat database, executes BOLSIG+, parses its output, and generates OpenFOAM-compatible lookup tables in a user-friendly way, ensuring consistency between the kinetic data and the solver inputs.
 
