@@ -49,8 +49,7 @@ captionFOAM is released under the GNU General Public License v3.0 (GPL-3.0).
 This work was partially funded by the European Union's Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie Action (Grant Agreement 101034403), the Horizon-EIC-2023 Pathfinder Open (Grant Agreement 101129853), and UKRI (Grant Agreement 10106237).
 
 ## Developers
-captionFOAM is developed by the In Silico Modelling group at the University of Cyprus
-(https://in-silico-modelling.ucy.ac.cy/).
+captionFOAM is developed by the [In Silico Modelling Group](https://in-silico-modelling.ucy.ac.cy/) at the University of Cyprus.
 
 - Core developer: — [George Vafakos](https://github.com/GeorgeVafakos)
 - Supervision: — [Vasileios Vavourakis](https://github.com/vasvav), [Pambos Anastasiades](https://github.com/pambosana)
