@@ -38,6 +38,8 @@ cd captionFOAM
 
 ## Examples
 
+- **Pin to plate**
+A classical 2D axissymetric pin-to-plate configuration using air chemistry operating under 10kV DC applied voltage and a 5 mm gap distance.
 ![Discharge simulation](docs/discharge.gif)
 
 ## License
@@ -53,8 +55,9 @@ captionFOAM is developed by the In Silico Modelling group at the University of C
 - Core developer: — [George Vafakos](https://github.com/GeorgeVafakos)
 - Supervision: — [Vasileios Vavourakis](https://github.com/vasvav), [Pambos Anastasiades](https://github.com/pambosana)
 
-## Citation
+<!-- ## Citation -->
 
 ## Contact
 vafakos.georgios@ucy.ac.cy
+
 vavourakis.vasileios@ucy.ac.cy
