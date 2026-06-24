@@ -39,7 +39,6 @@ cd captionFOAM
 ## Examples
 
 - **Pin to plate** 
-
 A classical 2D axisymmetric pin-to-plate configuration using air chemistry, operating at 10 kV DC applied voltage with a 5 mm gap distance between the electrodes. The animation below shows the resulting discharge dynamics as the streamer develops and propagates across the gap.
 ![Discharge simulation](docs/discharge.gif)
 
