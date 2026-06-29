@@ -1,0 +1,24 @@
+#!/bin/bash
+cd "${0%/*}" || exit                                # Run from this directory
+. $WM_PROJECT_DIR/bin/tools/RunFunctions            # Tutorial run functions
+#------------------------------------------------------------------------------
+
+# Delete 0 folder
+rm -r 0
+
+# Run blockMesh
+blockMesh
+
+# Replace 0 directory contents with 0.org
+rm -fvr 0
+cp -r 0.org 0
+
+# Prepare for remote paraview
+caseName=$(basename "$PWD")
+touch "$caseName.foam"
+
+# Output message
+echo
+echo Case created.
+
+#------------------------------------------------------------------------------

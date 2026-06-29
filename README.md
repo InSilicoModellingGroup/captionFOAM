@@ -1,5 +1,7 @@
 # captionFOAM
-Cold Atmospheric Plasma Tool for IONised gases based on OpenFOAM
+
+![Discharge simulation](docs/logo-banner.png)
+
 
 ## Description
 **captionFOAM** is an extension of OpenFOAM for the finite-volume modelling of cold atmospheric plasmas (CAPs). It extends OpenFOAM with custom libraries and solvers for low-temperature plasma discharges, solving the coupled drift-diffusion transport equations for charged species, Poisson's equation for the electric field. Transport coefficients and reaction rates are obtained as functions of either the reduced electric field E/N (LFA - Local Field Approximation) or the mean electron energy $\varepsilon_m$ (LMEA - Local Mean Energy Approximation).
@@ -38,7 +40,7 @@ cd captionFOAM
 
 ## Examples
 
-- **Pin-to-plate**: 
+- **Pin-to-plate**: \
 A classical 2D axisymmetric pin-to-plate configuration using air chemistry, operating at 10 kV DC applied voltage with a 5 mm gap distance between the electrodes. The animation below shows the resulting discharge dynamics as the streamer develops and propagates across the gap.
 ![Discharge simulation](docs/discharge.gif)
 
