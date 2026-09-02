@@ -1,0 +1,19 @@
+#!/bin/bash
+cd "${0%/*}" || exit                                # Run from this directory
+. $WM_PROJECT_DIR/bin/tools/RunFunctions            # Tutorial run functions
+#------------------------------------------------------------------------------
+
+# Create mesh
+blockMesh
+
+# Replace 0 directory contents with 0.org
+rm -fr 0
+cp -r 0.org 0
+
+# Output message
+touch case.foam
+echo
+echo Case created.
+
+#------------------------------------------------------------------------------
+

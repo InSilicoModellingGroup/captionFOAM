@@ -25,17 +25,12 @@ boundaryField
         type            zeroGradient;
     }
 
-    uniformInlet
+    inlet
     {
         type            zeroGradient;
     }
 
-    nonUniformInlet
-    {
-        type            zeroGradient;
-    }
-
-    outlet
+    target
     {
         type            speciesWallFluxCorrected;
         tempField       TEle_K;
@@ -43,7 +38,7 @@ boundaryField
         value           uniform 0;
     }
 
-    topBoundary
+    farfield
     {
         type            zeroGradient;
     }

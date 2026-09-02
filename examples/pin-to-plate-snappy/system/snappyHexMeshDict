@@ -111,7 +111,7 @@ addLayersControls
     expansionRatio 1.0;
 
     finalLayerThickness 1.0;   // thick-ish so it's obvious
-    minThickness       0.1;  // key: don't delete it if it ends up thinner locally
+    minThickness       1.0;  // key: don't delete it if it ends up thinner locally
 
     nGrow 0;
     featureAngle 30;

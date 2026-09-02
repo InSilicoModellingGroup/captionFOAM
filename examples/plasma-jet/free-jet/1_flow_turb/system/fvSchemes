@@ -9,46 +9,57 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volScalarField;
-    object      nE;
+    class       dictionary;
+    object      fvSchemes;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [1 -1 -2 0 0 0 0];
-
-internalField   uniform 6.408707e-08;
-
-boundaryField
-{    
-    electrode
-    {
-        type            zeroGradient;
-    }
-
-    inlet
-    {
-        type            zeroGradient;
-    }
-
-    target
-    {
-        type            zeroGradient;
-    }
-
-    farfield
-    {
-        type            zeroGradient;
-    }
-
-    frontWedge
-    {
-        type            wedge;
-    }
-
-    backWedge
-    {
-        type            wedge;
-    }
+ddtSchemes
+{
+    default         Euler;
 }
 
+gradSchemes
+{
+    default         Gauss linear;
+}
+
+divSchemes
+{
+    default         Gauss linear;
+
+    div(phi,U)      Gauss limitedLinearV 1;
+
+    div(phi,Yi_h)   Gauss limitedLinear 1;
+    div(phi,K)      Gauss limitedLinear 1;
+    div(phid,p)     Gauss limitedLinear 1;
+    div(phi,epsilon) Gauss limitedLinear 1;
+    div(phi,k) Gauss limitedLinear 1;
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear orthogonal;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         orthogonal;
+}
+
+fluxRequired
+{
+    default         no;
+    pCorr           ;
+    p_rgh;
+}
+
+
 // ************************************************************************* //
+

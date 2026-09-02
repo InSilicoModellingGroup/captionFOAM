@@ -28,23 +28,18 @@ boundaryField
         value           $voltage;
     }
 
-    uniformInlet
+    inlet
     {
         type            zeroGradient;
     }
 
-    nonUniformInlet
-    {
-        type            zeroGradient;
-    }
-
-    outlet
+    target
     {
         type            fixedValue;
         value           uniform 0;
     }
 
-    topBoundary
+    farfield
     {
         type            zeroGradient;
     }

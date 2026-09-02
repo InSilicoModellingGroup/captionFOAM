@@ -9,46 +9,65 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volScalarField;
-    object      nE;
+    class       dictionary;
+    object      fvSolution;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [1 -1 -2 0 0 0 0];
-
-internalField   uniform 6.408707e-08;
-
-boundaryField
-{    
-    electrode
+solvers
+{
+    "rho.*"
     {
-        type            zeroGradient;
+        solver          diagonal;
     }
 
-    inlet
+    p_rgh
     {
-        type            zeroGradient;
+        solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-6;
+        relTol           0.1;
     }
 
-    target
+    p_rghFinal
     {
-        type            zeroGradient;
+        $p_rgh
+        tolerance        1e-6;
+        relTol           0.0;
     }
 
-    farfield
+ 
+ 
+    "(U|e|k|h|nuTilda|epsilon)"
     {
-        type            zeroGradient;
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-6;
+        relTol          0.01;
     }
 
-    frontWedge
+    "(U|e|k|h|nuTilda|epsilon)Final"
     {
-        type            wedge;
+        $U;
+        relTol          0;
     }
-
-    backWedge
+    
+    Yi
     {
-        type            wedge;
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-8;
     }
 }
 
+PIMPLE
+{
+    momentumPredictor no;
+    nOuterCorrectors  1;
+    nCorrectors     2;
+    nNonOrthogonalCorrectors 0;
+}
+
+
 // ************************************************************************* //
+

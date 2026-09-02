@@ -1,7 +1,7 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  v2312                                 |
+|  \\    /   O peration     | Version:  v2406                                 |
 |   \\  /    A nd           | Website:  www.openfoam.com                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
@@ -10,27 +10,27 @@ FoamFile
     version     2.0;
     format      ascii;
     class       volScalarField;
-    object      nE;
+    object      alphat;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [1 -1 -2 0 0 0 0];
+dimensions      [1 -1 -1 0 0 0 0];
 
-internalField   uniform 6.408707e-08;
+internalField   uniform 0;
 
 boundaryField
-{    
-    electrode
+{
+    HeInlet
+    {
+        type            zeroGradient;
+    }   
+
+    airInlet
     {
         type            zeroGradient;
     }
 
-    inlet
-    {
-        type            zeroGradient;
-    }
-
-    target
+    outlet
     {
         type            zeroGradient;
     }
@@ -39,16 +39,7 @@ boundaryField
     {
         type            zeroGradient;
     }
-
-    frontWedge
-    {
-        type            wedge;
-    }
-
-    backWedge
-    {
-        type            wedge;
-    }
 }
+
 
 // ************************************************************************* //

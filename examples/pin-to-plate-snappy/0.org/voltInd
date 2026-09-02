@@ -26,23 +26,18 @@ boundaryField
         value           uniform 0;
     }
 
-    uniformInlet
+    inlet
     {
         type            zeroGradient;
     }
 
-    nonUniformInlet
-    {
-        type            zeroGradient;
-    }
-
-    outlet
+    target
     {
         type            fixedValue;
         value           uniform 0;
     }
 
-    topBoundary
+    farfield
     {
         type            zeroGradient;
     }

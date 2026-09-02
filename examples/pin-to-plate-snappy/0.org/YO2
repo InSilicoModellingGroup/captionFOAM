@@ -25,22 +25,17 @@ boundaryField
         type            zeroGradient;
     }
 
-    uniformInlet
+    inlet
     {
         type            zeroGradient;
     }
 
-    nonUniformInlet
+    target
     {
         type            zeroGradient;
     }
 
-    outlet
-    {
-        type            zeroGradient;
-    }
-
-    topBoundary
+    farfield
     {
         type            zeroGradient;
     }

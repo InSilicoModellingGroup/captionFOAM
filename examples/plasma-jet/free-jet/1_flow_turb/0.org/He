@@ -10,45 +10,42 @@ FoamFile
     version     2.0;
     format      ascii;
     class       volScalarField;
-    object      nE;
+    object      He;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [1 -1 -2 0 0 0 0];
+dimensions      [0 0 0 0 0 0 0];
 
-internalField   uniform 6.408707e-08;
+internalField   uniform 0;
 
 boundaryField
-{    
-    electrode
+{
+    HeInlet
     {
-        type            zeroGradient;
+        type            fixedValue;
+        value           uniform 1;
+    }   
+
+    airInlet
+    {
+        type            fixedValue;
+        value           uniform 0;
     }
 
-    inlet
+    outlet
     {
-        type            zeroGradient;
-    }
-
-    target
-    {
-        type            zeroGradient;
+        type            inletOutlet;
+        inletValue      $internalField;
+        value           $internalField;
     }
 
     farfield
     {
-        type            zeroGradient;
-    }
-
-    frontWedge
-    {
-        type            wedge;
-    }
-
-    backWedge
-    {
-        type            wedge;
+        type            inletOutlet;
+        inletValue      $internalField;
+        value           $internalField;
     }
 }
+
 
 // ************************************************************************* //
