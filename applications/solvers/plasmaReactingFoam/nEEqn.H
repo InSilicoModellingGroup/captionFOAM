@@ -22,8 +22,17 @@ if (solveEleEnergyEqn)
     // Mean electron energy
     em_J = nE/N[eID];
     em = J2eV*em_J;
-
-    // Calculate electron temperature
-    TEle = (2.0/3.0)*em;
-    TEle_K = TEle*eV2K;
 }
+else
+{
+    // LFA: the mean electron energy follows the local reduced electric field,
+    // so it is read straight off the BOLSIG+ tabulation instead of transported
+    label eID = composition.species().find("e");
+    energy.calcMeanEnergyLFA();
+    em_J = eV2J*em;
+    nE = em_J*N[eID];
+}
+
+// Calculate electron temperature
+TEle = (2.0/3.0)*em;
+TEle_K = TEle*eV2K;

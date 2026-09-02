@@ -31,7 +31,8 @@ plasmaCoeffApprox
     localCoeffApprox
     {
         type                LMEA;            // LFA or LMEA (should be consistent with bolsig+ input file)
-        solveEleEnergyEqn   yes;             // yes (default) or no (if LMEA then overrides to yes)
+                                             // LMEA solves the electron energy equation,
+                                             // LFA tabulates the mean energy against E/N
     }
     backgndAtmosphere
     {

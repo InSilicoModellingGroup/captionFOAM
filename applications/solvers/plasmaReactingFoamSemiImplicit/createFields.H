@@ -183,7 +183,7 @@ dimensionedScalar voltAmpTemp
 (
     "voltAmpTemp",
     dimensionSet(1,2,-3,0,0,-1,0),
-    scalar(1.0e3)
+    scalar(10.0e3)
 );
 
 // Electron thermal velocity field
@@ -363,13 +363,10 @@ voltHandler = voltageHandlerBase::NewVoltageWaveform
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 // Create electron mean energy fields
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-// Check if the electron energy equation will be solved
+// The local approximation decides how the mean electron energy is obtained:
+// LMEA solves the electron energy equation, LFA tabulates it against E/N.
 const dictionary& localCoeffApprox = physicalProperties.subDict("plasmaCoeffApprox").subDict("localCoeffApprox");
-bool solveEleEnergyEqn = localCoeffApprox.lookupOrDefault("solveEleEnergyEqn", true);
-if (localCoeffApprox.get<word>("type") == "LMEA")
-{
-    solveEleEnergyEqn = true;
-}
+const bool solveEleEnergyEqn = (localCoeffApprox.get<word>("type") == "LMEA");
 
 Info<< "Reading field nE\n" << endl;
 volScalarField nE

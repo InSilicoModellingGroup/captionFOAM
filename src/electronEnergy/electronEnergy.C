@@ -48,6 +48,8 @@ electronEnergy::electronEnergy
     energyMobility2DTable_(),
     energyDiffusivity2DTable_(),
     powerLoss2DTable_(),
+    meanEnergy1DTable_(),
+    meanEnergy2DTable_(),
     workingGasTableValues_(),
     energyMobilityLMEATables_(),
     energyDiffusivityLMEATables_(),
@@ -151,6 +153,15 @@ electronEnergy::electronEnergy
         bolsigProperties_.lookup("powerLoss")
     );
 
+    // Under LFA the mean energy is a tabulated quantity like any other
+    // coefficient. Under LMEA it is the table abscissa itself, so it has
+    // already been read into localCoeffApproxList.
+    scalarList meanEnergyList;
+    if (localCoeffApproxType_ == "LFA")
+    {
+        meanEnergyList = scalarList(bolsigProperties_.lookup("meanEnergy"));
+    }
+
     // Read for background atmosphere single or two gas mixture
     if (backgndAtmosphereType_ == "singleGas")
     {
@@ -215,6 +226,32 @@ electronEnergy::electronEnergy
             fileName("powerLoss1DTable")
         );
 
+        if (localCoeffApproxType_ == "LFA")
+        {
+            if (meanEnergyList.size() != localCoeffApproxList.size())
+            {
+                FatalIOErrorInFunction(bolsigProperties_)
+                    << "Size mismatch in 1D table:" << nl
+                    << "  localCoeffApprox size = " << localCoeffApproxList.size() << nl
+                    << "  meanEnergy size = " << meanEnergyList.size()
+                    << exit(FatalIOError);
+            }
+
+            List<Tuple2<scalar, scalar>> meanEnergyTable(localCoeffApproxList.size());
+
+            forAll(localCoeffApproxList, i)
+            {
+                meanEnergyTable[i] = Tuple2<scalar, scalar>(localCoeffApproxList[i],meanEnergyList[i]);
+            }
+
+            meanEnergy1DTable_ = interpolationTable<scalar>
+            (
+                meanEnergyTable,
+                bounds::repeatableBounding(bounds::repeatableBounding::CLAMP),
+                fileName("meanEnergy1DTable")
+            );
+        }
+
     }
     else if (backgndAtmosphereType_ == "twoGasMixture")
     {
@@ -261,6 +298,18 @@ electronEnergy::electronEnergy
                     << exit(FatalIOError);
             }
 
+            if (meanEnergyList.size() != workingGasTableValues_.size()*localCoeffApproxList.size())
+            {
+                FatalIOErrorInFunction(bolsigProperties_)
+                    << "Size mismatch in 2D LFA table:" << nl
+                    << "  workingGas size = " << workingGasTableValues_.size() << nl
+                    << "  localCoeffApprox size = " << localCoeffApproxList.size() << nl
+                    << "  meanEnergy size = " << meanEnergyList.size() << nl
+                    << "  expected size = "
+                    << workingGasTableValues_.size()*localCoeffApproxList.size()
+                    << exit(FatalIOError);
+            }
+
             // Create lookup tables for LFA energy transport coefficients
             List<Tuple2<scalar, List<Tuple2<scalar, scalar>>>> energyMobTable_
             (
@@ -274,12 +323,17 @@ electronEnergy::electronEnergy
             (
                 workingGasTableValues_.size()
             );
+            List<Tuple2<scalar, List<Tuple2<scalar, scalar>>>> meanEnergyTable_
+            (
+                workingGasTableValues_.size()
+            );
 
             forAll(workingGasTableValues_, i)
             {
                 List<Tuple2<scalar, scalar>> energyMobRow_(localCoeffApproxList.size());
                 List<Tuple2<scalar, scalar>> energyDiffRow_(localCoeffApproxList.size());
                 List<Tuple2<scalar, scalar>> powerLossRow_(localCoeffApproxList.size());
+                List<Tuple2<scalar, scalar>> meanEnergyRow_(localCoeffApproxList.size());
 
                 forAll(localCoeffApproxList, j)
                 {
@@ -290,6 +344,8 @@ electronEnergy::electronEnergy
                         Tuple2<scalar, scalar>(localCoeffApproxList[j], energyDiffList[index]);
                     powerLossRow_[j] =
                         Tuple2<scalar, scalar>(localCoeffApproxList[j], powerLossList[index]);
+                    meanEnergyRow_[j] =
+                        Tuple2<scalar, scalar>(localCoeffApproxList[j], meanEnergyList[index]);
                 }
 
                 energyMobTable_[i] =
@@ -312,6 +368,13 @@ electronEnergy::electronEnergy
                         workingGasTableValues_[i],
                         powerLossRow_
                     );
+
+                meanEnergyTable_[i] =
+                    Tuple2<scalar, List<Tuple2<scalar, scalar>>>
+                    (
+                        workingGasTableValues_[i],
+                        meanEnergyRow_
+                    );
             }
 
             energyMobility2DTable_ = interpolation2DTable<scalar>
@@ -333,6 +396,13 @@ electronEnergy::electronEnergy
                 powerLossTable_,
                 bounds::normalBounding(bounds::normalBounding::CLAMP),
                 fileName("powerLoss2DTable")
+            );
+
+            meanEnergy2DTable_ = interpolation2DTable<scalar>
+            (
+                meanEnergyTable_,
+                bounds::normalBounding(bounds::normalBounding::CLAMP),
+                fileName("meanEnergy2DTable")
             );
         }
         else
@@ -449,6 +519,65 @@ electronEnergy::electronEnergy
 
 
 // * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
+void electronEnergy::calcMeanEnergyLFA()
+{
+    if (localCoeffApproxType_ != "LFA")
+    {
+        FatalErrorInFunction
+            << "calcMeanEnergyLFA is only available under LFA. Under LMEA the "
+            << "mean energy is obtained from the electron energy equation."
+            << exit(FatalError);
+    }
+
+    if (backgndAtmosphereType_ == "singleGas")
+    {
+        // Internal field
+        forAll(em_, cellI)
+        {
+            em_[cellI] = meanEnergy1DTable_(EN_[cellI]);
+        }
+
+        // Boundary fields
+        forAll(em_.boundaryFieldRef(), patchI)
+        {
+            fvPatchScalarField& emPatch = em_.boundaryFieldRef()[patchI];
+            const fvPatchScalarField& ENPatch = EN_.boundaryField()[patchI];
+
+            forAll(emPatch, faceI)
+            {
+                emPatch[faceI] = meanEnergy1DTable_(ENPatch[faceI]);
+            }
+        }
+    }
+    else if (backgndAtmosphereType_ == "twoGasMixture")
+    {
+        const volScalarField& workingGas = *workingGasPtr_;
+
+        // Internal field
+        forAll(em_, cellI)
+        {
+            em_[cellI] = meanEnergy2DTable_(workingGas[cellI], EN_[cellI]);
+        }
+
+        // Boundary fields
+        forAll(em_.boundaryFieldRef(), patchI)
+        {
+            fvPatchScalarField& emPatch = em_.boundaryFieldRef()[patchI];
+            const fvPatchScalarField& workingGasPatch = workingGas.boundaryField()[patchI];
+            const fvPatchScalarField& ENPatch = EN_.boundaryField()[patchI];
+
+            forAll(emPatch, faceI)
+            {
+                emPatch[faceI] = meanEnergy2DTable_(workingGasPatch[faceI], ENPatch[faceI]);
+            }
+        }
+    }
+
+    // Correct boundary conditions (useful for mpi interfaces)
+    em_.correctBoundaryConditions();
+}
+
+
 void electronEnergy::calculateTransportCoeffs()
 {
     if (isConstant_)

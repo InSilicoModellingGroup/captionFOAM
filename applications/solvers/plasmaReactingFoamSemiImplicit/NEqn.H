@@ -94,7 +94,7 @@
     }
 
     // Calculate electric current
-    Icond = constant::electromagnetic::e*fvc::domainIntegrate(Gammat & EExt)/1.0e3;
+    Icond = constant::electromagnetic::e*fvc::domainIntegrate(Gammat & EExt)/voltAmpTemp;
 }
 
 

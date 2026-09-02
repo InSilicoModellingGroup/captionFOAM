@@ -71,6 +71,11 @@ protected:
     interpolation2DTable<scalar> energyMobility2DTable_;
     interpolation2DTable<scalar> energyDiffusivity2DTable_;
     interpolation2DTable<scalar> powerLoss2DTable_;
+
+    // Interpolation tables for the mean electron energy (LFA only)
+    interpolationTable<scalar> meanEnergy1DTable_;
+    interpolation2DTable<scalar> meanEnergy2DTable_;
+
     scalarList workingGasTableValues_;
     PtrList<interpolationTable<scalar>> energyMobilityLMEATables_;
     PtrList<interpolationTable<scalar>> energyDiffusivityLMEATables_;
@@ -78,7 +83,7 @@ protected:
 
     // Tabulation variables
     const volScalarField& EN_;
-    const volScalarField& em_;
+    volScalarField& em_;
     word localCoeffApproxType_;
     word backgndAtmosphereType_;
     word workingGasName_;
@@ -142,6 +147,9 @@ public:
 
     // Member functions
     void calculateTransportCoeffs();
+
+    //- Tabulate the mean electron energy against E/N (LFA only)
+    void calcMeanEnergyLFA();
 
     const volScalarField& ThetaE();
 
