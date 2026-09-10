@@ -72,9 +72,9 @@ int main(int argc, char *argv[])
 
         ++runTime;
 
-        if (runTime.timeIndex() % printScreenResults == 0 || runTime.timeIndex() == 1)
+        if (printNow)
         {
-            Info<< "\nTime = " << runTime.timeName() << "  Time step = " << runTime.timeIndex() << nl << endl;
+            Info<< "\nTime = " << runTime.timeName() << "  Time step No = " << runTime.timeIndex() << nl << endl;
             solverPerformance::debug = 1;
         }
 
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
         // Equation for mean electron energy density
         #include "nEEqn.H"
 
-        if (runTime.timeIndex() % printScreenResults == 0 || runTime.timeIndex() == 1)
+        if (printNow)
         {
             forAll(N, i)
             {
@@ -97,7 +97,6 @@ int main(int argc, char *argv[])
             Info<< "Max E = " << mag(gMax(E)) << endl;
             Info<< "Max E/N = " << gMax(mag(EN)()) << endl;
             Info<< "Max volt = " << gMax(mag(volt)()) << endl;
-            Info<< "Max uth = " << gMax(uth) << endl;
             Info<< "Max nE = " << gMax(nE) << endl;
             Info<< "Max em = " << gMax(em) << endl;
             Info<< "Max TEle (eV) = " << gMax(TEle) << endl;
@@ -115,7 +114,7 @@ int main(int argc, char *argv[])
         }
 
         solverPerformance::debug = 0;
-        if (runTime.timeIndex() % printScreenResults == 0 || runTime.timeIndex() == 1)
+        if (printNow)
         {
             runTime.printExecutionTime(Info);
         }

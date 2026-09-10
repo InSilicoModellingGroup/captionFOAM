@@ -41,4 +41,10 @@ maxCo =
 maxDeltaT =
     runTime.controlDict().getOrDefault<scalar>("maxDeltaT", GREAT);
 
+printScreenResults =
+    runTime.controlDict().getOrDefault("printScreenResults", 1);
+
+const bool printNow =
+    (runTime.timeIndex()+1) % printScreenResults == 0 || runTime.timeIndex() == runTime.startTimeIndex();
+
 // ************************************************************************* //

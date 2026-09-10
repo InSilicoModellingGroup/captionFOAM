@@ -7,11 +7,24 @@
     sigmaCond = 0.0*sigmaCond;
     divDiffFlux = 0.0*divDiffFlux;
     
-    // Update only the non constant reaction rate coefficients at selected time steps
-    // Always update at first time step though (if we want BOLSIG coeffs from the laplacian solution only)
+    // Update only the non constant reaction rate coefficients at selected time steps. Always update at first time step.
     if ((customUpdatePlasmaCoeffs && runTime.timeIndex() % plasmaCoeffsUpdateInterval == 0) || runTime.timeIndex() == 1)
     {
         composition.updateReactionRateCoeffs();
+    }
+
+    // Evaluate production/destraction rates from previous time step
+    PtrList<volScalarField> speciesChemistry(N.size());
+    forAll(N, i)
+    {
+        if (i != inertIndex)
+        {
+            speciesChemistry.set
+            (
+                i, 
+                new volScalarField(composition.R(i, N))
+            );
+        }
     }
 
     // Calculate species fluxes and solve for species number densities
@@ -49,14 +62,14 @@
                 + fvm::div(NiFlux, Ni)
                 - fvm::laplacian(Di, Ni)
               ==
-                composition.R(i,N)
+                speciesChemistry[i]
             );   
             
             NiEqn.relax();
             
             NiEqn.solve("Ni");
             
-            Ni.clamp_min(1.0e9);
+            Ni.clamp_min(0);
             Ni.correctBoundaryConditions();
             Nt += Ni;
 
@@ -80,7 +93,6 @@
 
     N[inertIndex] = NInert - Nt;
     N[inertIndex].clamp_min(0);
-    N[composition.species().find("e")].clamp_min(1.0e9);
 
     // Calculate surface charge on air-dielecrtic interface
     forAll(mesh.boundary(), patchI)

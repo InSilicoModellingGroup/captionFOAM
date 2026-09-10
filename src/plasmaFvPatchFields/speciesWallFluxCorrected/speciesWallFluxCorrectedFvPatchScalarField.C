@@ -50,7 +50,8 @@ speciesWallFluxCorrectedFvPatchScalarField::speciesWallFluxCorrectedFvPatchScala
     mass_(0.0),
     chargeNumber_(0),
     uthPrefactor_(0.0),
-    initializedScalars_(false)
+    initializedScalars_(false),
+    reflectionFraction_(0.0)
 {
     refValue()      = 0.0;
     refGrad()       = 0.0;
@@ -72,7 +73,7 @@ speciesWallFluxCorrectedFvPatchScalarField::speciesWallFluxCorrectedFvPatchScala
         dict,
         IOobjectOption::NO_READ
     ),
-    temperatureFieldName_(dict.getOrDefault<word>("tempField", "TGas")),
+    temperatureFieldName_(dict.getOrDefault<word>("temperature", "TGas")),
     electricFieldName_(dict.getOrDefault<word>("electricField", "E")),
     speciesName_(iF.name()),
     mass_(0.0),
@@ -109,7 +110,8 @@ speciesWallFluxCorrectedFvPatchScalarField::speciesWallFluxCorrectedFvPatchScala
     mass_(rhs.mass_),
     chargeNumber_(rhs.chargeNumber_),
     uthPrefactor_(rhs.uthPrefactor_),
-    initializedScalars_(rhs.initializedScalars_)
+    initializedScalars_(rhs.initializedScalars_),
+    reflectionFraction_(rhs.reflectionFraction_)
 {}
 
 
@@ -125,7 +127,8 @@ speciesWallFluxCorrectedFvPatchScalarField::speciesWallFluxCorrectedFvPatchScala
     mass_(rhs.mass_),
     chargeNumber_(rhs.chargeNumber_),
     uthPrefactor_(rhs.uthPrefactor_),
-    initializedScalars_(rhs.initializedScalars_)
+    initializedScalars_(rhs.initializedScalars_),
+    reflectionFraction_(rhs.reflectionFraction_)
 {}
 
 
@@ -142,7 +145,8 @@ speciesWallFluxCorrectedFvPatchScalarField::speciesWallFluxCorrectedFvPatchScala
     mass_(rhs.mass_),
     chargeNumber_(rhs.chargeNumber_),
     uthPrefactor_(rhs.uthPrefactor_),
-    initializedScalars_(rhs.initializedScalars_)
+    initializedScalars_(rhs.initializedScalars_),
+    reflectionFraction_(rhs.reflectionFraction_)
 {}
 
 
@@ -163,8 +167,8 @@ void speciesWallFluxCorrectedFvPatchScalarField::updateCoeffs()
         const IOdictionary& chargeNumberDict = this->db().lookupObject<IOdictionary>("chargeNumber");
         const scalar molarMass = molarMassDict.get<scalar>(speciesName_);
 
-        mass_ = molarMass / constant::physicoChemical::NA.value();
-        chargeNumber_ = chargeNumberDict.get<int>(speciesName_);
+        mass_ = molarMass / (1000*constant::physicoChemical::NA.value());
+        chargeNumber_ = chargeNumberDict.get<scalar>(speciesName_);
         uthPrefactor_ = 8.0*constant::physicoChemical::k.value()/(constant::mathematical::pi*mass_);
 
         initializedScalars_ = true;
@@ -197,10 +201,12 @@ void speciesWallFluxCorrectedFvPatchScalarField::updateCoeffs()
 void speciesWallFluxCorrectedFvPatchScalarField::write(Ostream& os) const
 {
     mixedFvPatchScalarField::write(os);
-    os.writeKeyword("tempField")
+    os.writeKeyword("temperature")
         << temperatureFieldName_ << token::END_STATEMENT << nl;
     os.writeKeyword("electricField")
         << electricFieldName_ << token::END_STATEMENT << nl;
+    os.writeKeyword("reflectionFraction")
+        << reflectionFraction_ << token::END_STATEMENT << nl;
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //

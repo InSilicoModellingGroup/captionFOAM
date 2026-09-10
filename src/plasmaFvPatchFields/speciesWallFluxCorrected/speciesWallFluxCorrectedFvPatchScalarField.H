@@ -65,7 +65,7 @@ protected:
     // Species-specific constants
     word speciesName_;
     scalar mass_;
-    int chargeNumber_;
+    scalar chargeNumber_;
     scalar uthPrefactor_;
     bool initializedScalars_;
     scalar reflectionFraction_;

@@ -57,11 +57,11 @@ class electronWallFluxCorrectedFvPatchScalarField
     public mixedFvPatchScalarField
 {
 protected:
-    //- Name of electric field
+    //- Name of fields
     word electricFieldName_;
+    word temperatureFieldName_;
 
     // Species-specific constants
-    word speciesName_;
     scalar uthPrefactor_;
     scalar reflectionFraction_;
 

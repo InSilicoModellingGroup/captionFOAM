@@ -44,8 +44,8 @@ electronWallFluxCorrectedFvPatchScalarField::electronWallFluxCorrectedFvPatchSca
 :
     mixedFvPatchScalarField(p, iF),
     electricFieldName_("E"),
-    speciesName_(iF.name()),
-    uthPrefactor_(0.0),
+    temperatureFieldName_("TEle_K"),
+    uthPrefactor_(8.0*constant::physicoChemical::k.value()/(constant::mathematical::pi*constant::atomic::me.value())),
     reflectionFraction_(0.0)
 {
     refValue()      = 0.0;
@@ -69,7 +69,7 @@ electronWallFluxCorrectedFvPatchScalarField::electronWallFluxCorrectedFvPatchSca
         IOobjectOption::NO_READ
     ),
     electricFieldName_(dict.getOrDefault<word>("electricField", "E")),
-    speciesName_(iF.name()),
+    temperatureFieldName_(dict.getOrDefault<word>("temperatureField", "TEle_K")),
     uthPrefactor_(8.0*constant::physicoChemical::k.value()/(constant::mathematical::pi*constant::atomic::me.value())),
     reflectionFraction_(dict.getOrDefault<scalar>("reflectionFraction", 0.0))
 {
@@ -96,7 +96,7 @@ electronWallFluxCorrectedFvPatchScalarField::electronWallFluxCorrectedFvPatchSca
 :
     mixedFvPatchScalarField(rhs, p, iF, m),
     electricFieldName_(rhs.electricFieldName_),
-    speciesName_(rhs.speciesName_),
+    temperatureFieldName_(rhs.temperatureFieldName_),
     uthPrefactor_(rhs.uthPrefactor_),
     reflectionFraction_(rhs.reflectionFraction_)
 {}
@@ -109,7 +109,7 @@ electronWallFluxCorrectedFvPatchScalarField::electronWallFluxCorrectedFvPatchSca
 :
     mixedFvPatchScalarField(rhs),
     electricFieldName_(rhs.electricFieldName_),
-    speciesName_(rhs.speciesName_),
+    temperatureFieldName_(rhs.temperatureFieldName_),
     uthPrefactor_(rhs.uthPrefactor_),
     reflectionFraction_(rhs.reflectionFraction_)
 {}
@@ -123,7 +123,7 @@ electronWallFluxCorrectedFvPatchScalarField::electronWallFluxCorrectedFvPatchSca
 :
     mixedFvPatchScalarField(rhs, iF),
     electricFieldName_(rhs.electricFieldName_),
-    speciesName_(rhs.speciesName_),
+    temperatureFieldName_(rhs.temperatureFieldName_),
     uthPrefactor_(rhs.uthPrefactor_),
     reflectionFraction_(rhs.reflectionFraction_)
 {}
@@ -141,9 +141,11 @@ void electronWallFluxCorrectedFvPatchScalarField::updateCoeffs()
     const scalarField& D = patch().lookupPatchField<volScalarField, scalar>("diffusionCoeffSpecies_e");
     const scalarField& mu = patch().lookupPatchField<volScalarField, scalar>("mobilityCoeffSpecies_e");
     const vectorField& E = patch().lookupPatchField<volVectorField, vector>(electricFieldName_);
-    const scalarField& T = patch().lookupPatchField<volScalarField, scalar>("TEle_K");
+    const scalarField& T = patch().lookupPatchField<volScalarField, scalar>(temperatureFieldName_);
     const surfaceScalarField& sumPosFluxField = this->db().lookupObject<surfaceScalarField>("sumPosFlux");
     const scalarField sumPosFlux(sumPosFluxField.boundaryField()[patch().index()]);
+
+    Info<< "electronWallFluxCorrected on " << patch().name() << ": max sumPosFlux = " << gMax(sumPosFlux) << ", min = " << gMin(sumPosFlux) << endl;
 
     // Check flux direction
     const vectorField nHat = patch().nf();
@@ -168,6 +170,8 @@ void electronWallFluxCorrectedFvPatchScalarField::write(Ostream& os) const
     mixedFvPatchScalarField::write(os);
     os.writeKeyword("electricField")
         << electricFieldName_ << token::END_STATEMENT << nl;
+    os.writeKeyword("reflectionFraction")
+        << reflectionFraction_ << token::END_STATEMENT << nl;
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
