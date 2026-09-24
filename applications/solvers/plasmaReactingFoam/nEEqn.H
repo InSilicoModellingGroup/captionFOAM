@@ -20,7 +20,7 @@ if (solveEleEnergyEqn)
     nEEqn.solve();
 
     // Mean electron energy
-    em_J = nE/N[eID];
+    em_J = nE/max(N[eID], dimensionedScalar("small", N[eID].dimensions(), 1.0e6));
     em = J2eV*em_J;
 }
 else

@@ -47,7 +47,7 @@ if (adjustTimeStep)
         )
     );
 
-    if (runTime.timeIndex() % printScreenResults == 0 || runTime.timeIndex() == 1)
+    if (printNow)
     {
         Info<< "deltaT = " <<  runTime.deltaTValue() << endl;
     }

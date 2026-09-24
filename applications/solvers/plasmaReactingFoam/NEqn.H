@@ -4,13 +4,43 @@
     volVectorField Gammat(0.0*Gamma[0]);
     rhoq = 0.0*rhoq;
     sumPosFlux = 0.0*sumPosFlux;
+    sigmaCond = 0.0*sigmaCond;
+    divDiffFlux = 0.0*divDiffFlux;
     
-    // Update only the non constant reaction rate coefficients at selected time steps
-    // Always update at first time step though (if we want BOLSIG coeffs from the laplacian solution only)
+    // Update only the non constant reaction rate coefficients at selected time steps. Always update at first time step.
     if ((customUpdatePlasmaCoeffs && runTime.timeIndex() % plasmaCoeffsUpdateInterval == 0) || runTime.timeIndex() == 1)
     {
         composition.updateReactionRateCoeffs();
     }
+
+    // Evaluate production/destraction rates from previous time step
+    PtrList<volScalarField> speciesChemistry(N.size());
+    forAll(N, i)
+    {
+        if (i != inertIndex)
+        {
+            speciesChemistry.set
+            (
+                i, 
+                new volScalarField(composition.R(i, N))
+            );
+        }
+    }
+
+    // Positive ion flux for secondary emission from the previous time step
+    forAll(N, i)
+    {
+        if (i != inertIndex)
+        {
+            const scalar& zi = chargeNumber.get<scalar>(composition.species()[i]);
+
+            if (zi > 0)
+            {
+                sumPosFlux += gammaSE*j[i]/(zi*constant::electromagnetic::e);
+            }
+        }
+    }
+    sumPosFlux.clamp_min(0);
 
     // Calculate species fluxes and solve for species number densities
     forAll(N, i)
@@ -47,36 +77,31 @@
                 + fvm::div(NiFlux, Ni)
                 - fvm::laplacian(Di, Ni)
               ==
-                composition.R(i,N)
+                speciesChemistry[i]
             );   
             
             NiEqn.relax();
             
             NiEqn.solve("Ni");
             
-            Ni.clamp_min(1.0e9);
-            Nt += Ni;
+            Ni.clamp_min(0);
             Ni.correctBoundaryConditions();
+            Nt += Ni;
 
             // Update species integrated face particle flux with latest Ni values.
             ji = zi*constant::electromagnetic::e*(-zi*linearInterpolate(mui*Ni)*fvc::snGrad(volt) - linearInterpolate(Di)*fvc::snGrad(Ni));
             Gammai = -zi*mui*Ni*fvc::grad(volt) - Di*fvc::grad(Ni);
             rhoq += zi*constant::electromagnetic::e*N[i];
+            sigmaCond += mag(zi)*constant::electromagnetic::e*mui*Ni; // for semi-implicit
+            divDiffFlux += zi*constant::electromagnetic::e*fvc::laplacian(Di, Ni); // for semi-implicit
             jt += ji;
             Gammat += Gammai;
-
-            if (zi > 0)
-            {
-                sumPosFlux += gammaSE*ji/(zi*constant::electromagnetic::e);
-            }
         }
-
-        N[composition.species().find("e")].clamp_max(1.0e25);
     }
-
+    
+    N[composition.species().find("e")].clamp_max(1.0e25);
     N[inertIndex] = NInert - Nt;
     N[inertIndex].clamp_min(0);
-    N[composition.species().find("e")].clamp_min(1.0e9);
 
     // Calculate surface charge on air-dielecrtic interface
     forAll(mesh.boundary(), patchI)
@@ -90,7 +115,7 @@
     }
 
     // Calculate electric current
-    Icond = constant::electromagnetic::e*fvc::domainIntegrate(Gammat & EExt)/1.0e3;
+    Icond = constant::electromagnetic::e*fvc::domainIntegrate(Gammat & EExt)/voltAmpTemp;
 }
 
 

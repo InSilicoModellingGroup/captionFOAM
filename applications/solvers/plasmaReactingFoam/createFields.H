@@ -183,7 +183,7 @@ dimensionedScalar voltAmpTemp
 (
     "voltAmpTemp",
     dimensionSet(1,2,-3,0,0,-1,0),
-    scalar(1.0e3)
+    scalar(10.0e3)
 );
 
 // Electron thermal velocity field
@@ -765,4 +765,44 @@ volScalarField rhoq
     ),
     mesh,
     dimensionedScalar("temp", dimensionSet(0,-3,1,0,0,1,0), scalar(0))
+);
+
+
+
+
+
+
+
+
+
+
+
+
+// createFields.H  ("sigma" is taken by surface charge, hence sigmaCond)
+volScalarField sigmaCond
+(
+    IOobject
+    (
+        "sigmaCond", 
+        runTime.timeName(), 
+        mesh, 
+        IOobject::NO_READ, 
+        IOobject::AUTO_WRITE
+    ),
+    mesh,
+    dimensionedScalar("zero", dimensionSet(-1,-3,3,0,0,2,0), scalar(0))   // S/m
+);
+
+volScalarField divDiffFlux
+(
+    IOobject
+    (
+        "divDiffFlux", 
+        runTime.timeName(), 
+        mesh, 
+        IOobject::NO_READ, 
+        IOobject::NO_WRITE
+    ),
+    mesh,
+    dimensionedScalar("zero", dimensionSet(0,-3,0,0,0,1,0), scalar(0))    // A/m^3
 );

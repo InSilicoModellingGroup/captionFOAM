@@ -37,14 +37,15 @@ scalar meanCoNum = 0.0;
 
 {
     label eID = composition.species().find("e");
-    const scalar& chargeNumberValue = chargeNumber.get<scalar>(composition.species()[composition.species().find("e")]);
-    NFlux[eID] = linearInterpolate(chargeNumberValue*mobilityCoeffSpecies[eID])*mesh.magSf()*fvc::snGrad(volt);
-    // surfaceScalarField EFlux = -linearInterpolate(muE)*mesh.magSf()*fvc::snGrad(volt);
+
+    surfaceScalarField eFlux
+    (
+        linearInterpolate(mobilityCoeffSpecies[eID])*mesh.magSf()*fvc::snGrad(volt)
+    );
 
     scalarField sumPhi
     (
-        fvc::surfaceSum(mag(NFlux[eID]))().primitiveField()
-        // fvc::surfaceSum(mag(EFlux))().primitiveField()
+        fvc::surfaceSum(mag(eFlux))().primitiveField()
     );
 
     CoNum = 0.5*gMax(sumPhi/mesh.V().field())*runTime.deltaTValue();
@@ -54,7 +55,7 @@ scalar meanCoNum = 0.0;
 }
 
 
-if (runTime.timeIndex() % printScreenResults == 0 || runTime.timeIndex() == 1)
+if (printNow)
 {
     Info<< "Courant Number mean: " << meanCoNum
         << " max: " << CoNum << endl;

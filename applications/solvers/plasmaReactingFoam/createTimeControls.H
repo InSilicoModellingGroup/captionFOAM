@@ -66,12 +66,4 @@ int plasmaCoeffsUpdateInterval =
     runTime.controlDict().lookupOrDefault("plasmaCoeffsUpdateInterval", 1);
 
 
-// Clamping of electric potential
-bool voltageClamp =
-    runTime.controlDict().lookupOrDefault("voltageClamp", false);
-
-scalar maxVolt =
-    runTime.controlDict().lookupOrDefault<scalar>("maxVolt", GREAT);
-
-
 // ************************************************************************* //
